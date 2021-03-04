@@ -97,7 +97,7 @@ const GradientColorControl = ({ gradientColor, onChange }) => {
 				>
 					<ToggleButton
 						defaultSelected={
-							radialShape === "linear" ? RADIAL_TYPES[0] : RADIAL_TYPES[1]
+							radialShape === "ellipse" ? RADIAL_TYPES[0] : RADIAL_TYPES[1]
 						}
 						options={RADIAL_TYPES}
 						onChange={(radialShape) => setRadialShape(radialShape)}
