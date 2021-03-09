@@ -82,7 +82,7 @@ const GradientColorControl = ({ gradientColor, onChange }) => {
 			>
 				<ToggleButton
 					defaultSelected={
-						gradientType === "ellipse" ? GRADIENT_TYPE[0] : GRADIENT_TYPE[1]
+						gradientType === "linear" ? GRADIENT_TYPE[0] : GRADIENT_TYPE[1]
 					}
 					options={GRADIENT_TYPE}
 					onChange={(gradientType) => setGradientType(gradientType)}
