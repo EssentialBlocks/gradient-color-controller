@@ -11,7 +11,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import ColorControl from "../color-control";
 import ToggleButton from "../toggle-button";
-import { GRADIENT_TYPE, RADIAL_TYPES, FOCUS_COLOR } from "./constants";
+import { GRADIENT_TYPE, RADIAL_TYPES } from "./constants";
 import { parseGradientColor } from "./helper";
 
 const GradientColorControl = ({ gradientColor, onChange }) => {
@@ -86,7 +86,6 @@ const GradientColorControl = ({ gradientColor, onChange }) => {
           }
           options={GRADIENT_TYPE}
           onChange={(gradientType) => setGradientType(gradientType)}
-          focusColor={FOCUS_COLOR}
         />
       </BaseControl>
 
@@ -101,7 +100,6 @@ const GradientColorControl = ({ gradientColor, onChange }) => {
             }
             options={RADIAL_TYPES}
             onChange={(radialShape) => setRadialShape(radialShape)}
-            focusColor={FOCUS_COLOR}
           />
         </BaseControl>
       )}
