@@ -9,7 +9,7 @@ export const parseGradientColor = (gradientColor) => {
 
   const [colorOne, colorTwo] = gradientColor.match(
     /\#[a-f\d]{3,8}|rgba?\([\d\,\.]{3,16}\)/gi
-  ) || ["#000000", "#000000"];
+  ) || [,];
 
   const [gradientType] = gradientColor.match(/\w{6}(?=-)/i) || ["linear"];
 
