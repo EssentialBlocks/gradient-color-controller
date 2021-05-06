@@ -154,17 +154,6 @@ const GradientColorControl = ({ gradientColor, onChange }) => {
             />
           )}
         />
-        {colorOne && (
-          <Button
-            isSmall
-            className="eb-color-undo"
-            icon="image-rotate"
-            style={{
-              transform: "scaleX(-1) rotate(90deg)",
-            }}
-            onClick={() => setColorOne(undefined)}
-          ></Button>
-        )}
       </BaseControl>
 
       <BaseControl label={"Second Color"} className="eb-color-base">
@@ -196,17 +185,6 @@ const GradientColorControl = ({ gradientColor, onChange }) => {
             />
           )}
         />
-        {colorTwo && (
-          <Button
-            isSmall
-            className="eb-color-undo"
-            icon="image-rotate"
-            style={{
-              transform: "scaleX(-1) rotate(90deg)",
-            }}
-            onClick={() => setColorTwo(undefined)}
-          ></Button>
-        )}
       </BaseControl>
 
       <RangeControl
