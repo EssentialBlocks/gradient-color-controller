@@ -1,15 +1,8 @@
 /**
  * WordPress dependencies
  */
-import { __ } from "@wordpress/i18n";
-import {
-  RangeControl,
-  BaseControl,
-  Dropdown,
-  Tooltip,
-  ColorPicker,
-  Button,
-} from "@wordpress/components";
+const { __ } = wp.i18n;
+const { RangeControl, BaseControl } = wp.components;
 
 /**
  * Internal dependencies
@@ -20,20 +13,6 @@ import ColorControl from "../color-control";
 import ToggleButton from "../toggle-button";
 import { GRADIENT_TYPE, RADIAL_TYPES } from "./constants";
 import { parseGradientColor } from "./helper";
-
-const colorBallStyles = {
-  padding: 2,
-  borderRadius: 0,
-  background: "white",
-  border: "1px solid #ebebeb",
-};
-
-const colorStyles = {
-  height: 16,
-  width: 16,
-  borderRadius: "0%",
-  boxShadow: "inset 0 0 0 1px rgba(0,0,0,.1)",
-};
 
 const GradientColorControl = ({ gradientColor, onChange }) => {
   const [gradientType, setGradientType] = useState("linear");
@@ -125,67 +104,17 @@ const GradientColorControl = ({ gradientColor, onChange }) => {
         </BaseControl>
       )}
 
-      <BaseControl label={"First Color"} className="eb-color-base">
-        <Dropdown
-          renderToggle={({ isOpen, onToggle }) => (
-            <Tooltip text={colorOne || "default"}>
-              <div
-                className="eb-color-ball"
-                style={colorOne && colorBallStyles}
-              >
-                <div
-                  style={{
-                    ...colorStyles,
-                    backgroundColor: colorOne,
-                  }}
-                  aria-expanded={isOpen}
-                  onClick={onToggle}
-                  aria-label={colorOne || "default"}
-                ></div>
-              </div>
-            </Tooltip>
-          )}
-          renderContent={() => (
-            <ColorPicker
-              color={colorOne}
-              onChangeComplete={({ rgb }) => {
-                setColorOne(`rgba(${rgb.r},${rgb.g},${rgb.b},${rgb.a})`);
-              }}
-            />
-          )}
-        />
-      </BaseControl>
+      <ColorControl
+        label={__("First Color")}
+        color={colorOne}
+        onChange={(colorOne) => setColorOne(colorOne)}
+      />
 
-      <BaseControl label={"Second Color"} className="eb-color-base">
-        <Dropdown
-          renderToggle={({ isOpen, onToggle }) => (
-            <Tooltip text={colorTwo || "default"}>
-              <div
-                className="eb-color-ball"
-                style={colorTwo && colorBallStyles}
-              >
-                <div
-                  style={{
-                    ...colorStyles,
-                    backgroundColor: colorTwo,
-                  }}
-                  aria-expanded={isOpen}
-                  onClick={onToggle}
-                  aria-label={colorTwo || "default"}
-                ></div>
-              </div>
-            </Tooltip>
-          )}
-          renderContent={() => (
-            <ColorPicker
-              color={colorTwo}
-              onChangeComplete={({ rgb }) => {
-                setColorTwo(`rgba(${rgb.r},${rgb.g},${rgb.b},${rgb.a})`);
-              }}
-            />
-          )}
-        />
-      </BaseControl>
+      <ColorControl
+        label={__("Second Color")}
+        color={colorTwo}
+        onChange={(colorTwo) => setColorTwo(colorTwo)}
+      />
 
       <RangeControl
         label={__("First Color Position")}
