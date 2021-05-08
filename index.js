@@ -16,7 +16,6 @@ import {
  */
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import ColorControl from "../color-control";
 import ToggleButton from "../toggle-button";
 import { GRADIENT_TYPE, RADIAL_TYPES } from "./constants";
 import { parseGradientColor } from "./helper";
