@@ -6,15 +6,12 @@ export const parseGradientColor = (gradientColor) => {
     radialShape = "ellipse",
     radialX = 50,
     radialY = 50;
-
   const [colorOne, colorTwo] = gradientColor.match(
     /\#[a-f\d]{3,8}|rgba?\([\d\,\.]{3,16}\)/gi
-  ) || [,];
-
+  ) || ["#0000", "#0000"];
   const [gradientType] = gradientColor.match(/\w{6}(?=-)/i) || ["linear"];
-
   if (gradientType == "linear") {
-    angle = (gradientColor.match(/\d{1,3}(?=deg)/i) || [])[0];
+    angle = gradientColor.match(/\d{1,3}(?=deg)/i)[0];
     [colorOnePosition, colorTwoPosition] = gradientColor.match(
       /\d{1,3}(?=\%)/gi
     ) || [0, 100];
@@ -25,7 +22,6 @@ export const parseGradientColor = (gradientColor) => {
     colorOnePosition = (gradientColor.match(/\d{1,3}(?=% ,)/gi) || [])[0];
     colorTwoPosition = (gradientColor.match(/\d{1,3}(?=%\))/gi) || [])[0];
   }
-
   return {
     gradientType,
     angle: parseInt(angle),
