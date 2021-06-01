@@ -1,21 +1,22 @@
 /**
  * WordPress dependencies
  */
-import { __ } from "@wordpress/i18n";
-import {
+const { __ } = wp.i18n;
+const {
   RangeControl,
   BaseControl,
   Dropdown,
   Tooltip,
   ColorPicker,
-  Button,
-} from "@wordpress/components";
+  // Button,
+} = wp.components;
+const { useState, useEffect } = wp.element;
 
 /**
  * Internal dependencies
  */
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+// import React, { useState, useEffect } from "react";
+// import PropTypes from "prop-types";
 import ToggleButton from "../toggle-button";
 import { GRADIENT_TYPE, RADIAL_TYPES } from "./constants";
 import { parseGradientColor } from "./helper";
@@ -235,9 +236,9 @@ const GradientColorControl = ({ gradientColor, onChange }) => {
   );
 };
 
-GradientColorControl.propTypes = {
-  gradientColor: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-};
+// GradientColorControl.propTypes = {
+//   gradientColor: PropTypes.string.isRequired,
+//   onChange: PropTypes.func.isRequired,
+// };
 
 export default GradientColorControl;
