@@ -7,7 +7,7 @@ const { RangeControl, BaseControl } = wp.components;
 /**
  * Internal dependencies
  */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import ColorControl from "../color-control";
 import ToggleButton from "../toggle-button";
@@ -15,41 +15,27 @@ import { GRADIENT_TYPE, RADIAL_TYPES } from "./constants";
 import { parseGradientColor } from "./helper";
 
 const GradientColorControl = ({ gradientColor, onChange }) => {
-  const [gradientType, setGradientType] = useState("linear");
-  const [colorOne, setColorOne] = useState("transparent");
-  const [colorOnePosition, setColorOnePosition] = useState(0);
-  const [colorTwo, setColorTwo] = useState("transparent");
-  const [colorTwoPosition, setColorTwoPosition] = useState(100);
-  const [angle, setAngle] = useState(0);
-  const [radialShape, setRadialShape] = useState("ellipse");
-  const [radialX, setRadialX] = useState(50);
-  const [radialY, setRadialY] = useState(50);
+  // Start from the saved value. (They used to start as "transparent" and be filled
+  // in by an effect, while a second effect already called onChange with the
+  // transparent defaults, so just opening the control could overwrite the saved gradient.)
+  const initial = parseGradientColor(gradientColor);
+  const [gradientType, setGradientType] = useState(initial.gradientType);
+  const [colorOne, setColorOne] = useState(initial.colorOne);
+  const [colorOnePosition, setColorOnePosition] = useState(initial.colorOnePosition);
+  const [colorTwo, setColorTwo] = useState(initial.colorTwo);
+  const [colorTwoPosition, setColorTwoPosition] = useState(initial.colorTwoPosition);
+  const [angle, setAngle] = useState(initial.angle);
+  const [radialShape, setRadialShape] = useState(initial.radialShape);
+  const [radialX, setRadialX] = useState(initial.radialX);
+  const [radialY, setRadialY] = useState(initial.radialY);
 
+  // Report changes made by the user, not the values the control started with.
+  const isFirstRender = useRef(true);
   useEffect(() => {
-    let {
-      gradientType,
-      angle,
-      colorOne,
-      colorTwo,
-      colorOnePosition,
-      colorTwoPosition,
-      radialShape,
-      radialX,
-      radialY,
-    } = parseGradientColor(gradientColor);
-
-    setGradientType(gradientType);
-    setAngle(angle);
-    setColorOne(colorOne);
-    setColorTwo(colorTwo);
-    setColorOnePosition(colorOnePosition);
-    setColorTwoPosition(colorTwoPosition);
-    setRadialShape(radialShape);
-    setRadialX(radialX);
-    setRadialY(radialY);
-  }, []);
-
-  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     onChange(
       gradientType === "linear" ? getLinearGradient() : getRadialGradient()
     );
